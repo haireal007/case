@@ -105,7 +105,6 @@ canvas.addEventListener('click', function () {
             console.log('game play');
             break
         case 'end':
-            alert('end game');
             break;
     }
 })
@@ -167,16 +166,16 @@ function Bird() {
         bird.CY = 700;
     }
     if (bird.CX + bird.CW > arrPipe[0].CX && bird.CX < arrPipe[0].CX + arrPipe[0].CW && (
-        bird.CY <arrPipe[0].CY + arrPipe[0].CH|| bird.CY+ bird.CH> arrPipe[0].CY + arrPipe[0].CH + arrPipe[0].space
+        bird.CY < arrPipe[0].CY + arrPipe[0].CH || bird.CY + bird.CH > arrPipe[0].CY + arrPipe[0].CH + arrPipe[0].space
     )) {
-        game="end";
+        game = "end";
     }
-    if (bird.CX == arrPipe[0].CX + 200 || bird.CX == arrPipe[0].CX + 199) {
+    if (bird.CX == arrPipe[0].CX + 30 || bird.CX == arrPipe[0].CX + 29) {
         score++;
         time--;
     }
     let score1 = new Texts("SCORE: " + score, 100, 100)
-    score1.drawtext();
+    return score1.drawtext();
 }
 
 function update() {
@@ -207,6 +206,14 @@ function animate() {
         drawArrGruond();
         bird.draw();
         update();
+    }
+    if (game == "end") {
+        background.draw();
+        drawArrGruond();
+        let score1 = new Texts("SCORE: " + score, 100, 100)
+        score1.drawtext();
+        let gameover = new Texts("Game Over", 250, 400);
+        gameover.drawtext();
     }
 }
 
